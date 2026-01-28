@@ -64,6 +64,7 @@ void MPU6050Driver::handleInput()
 
 void MPU6050Driver::declareParameters()
 {
+  this->declare_parameter<int>("bus_number", 7);
   this->declare_parameter<bool>("calibrate", true);
   this->declare_parameter<int>("gyro_range", MPU6050Sensor::GyroRange::GYR_250_DEG_S);
   this->declare_parameter<int>("accel_range", MPU6050Sensor::AccelRange::ACC_2_G);
