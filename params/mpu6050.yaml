@@ -1,5 +1,8 @@
 mpu6050driver_node:
   ros__parameters:
+    bus_number: 7 # I2C bus number (e.g., 1 for /dev/i2c-1) for jetson with pins connected
+    # to 3 and 5 (SDA, SCL) on the Jetson Nano the bus number is 7
+
     calibrate: True
     # Gyroscope range: 0 -> +-250°/s, 1 -> +-500°/s, 2 -> +-1000°/s, 3 -> +-2000°/s
     gyro_range: 0

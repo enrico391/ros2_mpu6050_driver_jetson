@@ -14,7 +14,16 @@ extern "C" {
 
 MPU6050Sensor::MPU6050Sensor(int bus_number)
 {
-  // TODO: make char append cleaner
+  setBusNumber(bus_number);
+}
+MPU6050Sensor::MPU6050Sensor(){
+  
+}
+
+MPU6050Sensor::~MPU6050Sensor() { close(file_); }
+
+void MPU6050Sensor::setBusNumber(int bus_number)
+{
   filename_[9] = *std::to_string(bus_number).c_str();
   std::cout << filename_ << std::endl;
   file_ = open(filename_, O_RDWR);
@@ -27,7 +36,7 @@ MPU6050Sensor::MPU6050Sensor(int bus_number)
     std::cerr << "Failed to find device address! Check device address!";
     exit(1);
   }
-  // Wake up sensor
+  // Wake up the MPU6050 as it starts in sleep mode
   int result = i2c_smbus_write_byte_data(file_, PWR_MGMT_1, 0);
   if (result < 0) reportError(errno);
   // Read current ranges from sensor
@@ -36,7 +45,10 @@ MPU6050Sensor::MPU6050Sensor(int bus_number)
   readDlpfConfig();
 }
 
-MPU6050Sensor::~MPU6050Sensor() { close(file_); }
+int MPU6050Sensor::getBusNumber() const
+{
+  return filename_[9] - '0';
+}
 
 void MPU6050Sensor::printConfig() const
 {

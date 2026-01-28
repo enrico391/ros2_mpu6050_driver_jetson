@@ -11,6 +11,9 @@ MPU6050Driver::MPU6050Driver()
   // Declare parameters
   declareParameters();
   // Set parameters
+  // set the bus number to initialize the sensor
+  mpu6050_->setBusNumber(this->get_parameter("bus_number").as_int());
+  
   mpu6050_->setGyroscopeRange(
       static_cast<MPU6050Sensor::GyroRange>(this->get_parameter("gyro_range").as_int()));
   mpu6050_->setAccelerometerRange(

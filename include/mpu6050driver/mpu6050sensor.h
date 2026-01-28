@@ -6,7 +6,8 @@
 
 class MPU6050Sensor {
  public:
-  MPU6050Sensor(int bus_number = 1);
+  MPU6050Sensor();
+  MPU6050Sensor(int bus_number);
   ~MPU6050Sensor();
 
   enum AccelRange { ACC_2_G, ACC_4_G, ACC_8_G, ACC_16_G };
@@ -21,6 +22,8 @@ class MPU6050Sensor {
     DLPF_5_HZ
   };
 
+  void setBusNumber(int bus_number);
+  int getBusNumber() const;
   void printConfig() const;
   void printOffsets() const;
   void setGyroscopeRange(GyroRange range);
